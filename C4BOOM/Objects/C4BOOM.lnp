@@ -1,0 +1,8 @@
+".\Objects\STARTUP.obj",
+".\Objects\main.obj",
+".\Objects\delay.obj",
+".\Objects\LCD1602.obj",
+".\Objects\BUZZ.obj",
+".\Objects\MatirxKey.obj" 
+TO ".\Objects\C4BOOM" 
+PRINT(".\Listings\C4BOOM.m51") RAMSIZE(256) 

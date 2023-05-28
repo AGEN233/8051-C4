@@ -1,0 +1,134 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              05/28/2023 12:00:49 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: D:\Development\KEIL\Keil5\C51\BIN\C51.EXE SRC\main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PR
+                    -INT(.\Listings\main.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include "public.h"
+   2          #include "BUZZ.h"
+   3          #include "MatirxKey.h"
+   4          #include "LCD1602.h"
+   5          #include "delay.h"
+   6          #include "string.h"
+   7          #define LED P2
+   8          uChar password[7] = {10, 10, 10, 10, 10, 10, 10};
+   9          code uChar passwordSave[] = {7, 3, 5, 5, 6, 0, 8};
+  10          uChar count;
+  11          void startBomm(void)
+  12          {
+  13   1          uInit i;
+  14   1          LCD1602_Clean(0);
+  15   1          for (i = 0; i < 60; i++)
+  16   1          {
+  17   2              LED = 0x00;
+  18   2              LCD1602_DisplayStr(1, 2, "Now Start BOOM");
+  19   2              Buzzer_Time(100);
+  20   2              LED = 0xff;
+  21   2              LCD1602_Clean(1);
+  22   2              delay(1000 - (16 * i));
+  23   2          }
+  24   1      
+  25   1          for (i = 0; i < 25; i++)
+  26   1          {
+  27   2              LED = 0x00;
+  28   2              LCD1602_DisplayStr(2, 1, "000000");
+  29   2              Buzzer_Time(100);
+  30   2              LED = 0xff;
+  31   2              LCD1602_Clean(1);
+  32   2              delay(24 - i);
+  33   2          }
+  34   1          LCD1602_Clean(0);
+  35   1          LCD1602_DisplayStr(2, 1, "******");
+  36   1          for (i = 0; i < 5; i++)
+  37   1          {
+  38   2              P2 = 0x00;
+  39   2              Buzzer_Time(50);
+  40   2              P2 = 0xFF;
+  41   2          }
+  42   1          while (1)
+  43   1              ;
+  44   1      }
+  45          void passworldError(void)
+  46          {
+  47   1          while (1)
+  48   1          {
+  49   2              LCD1602_Clean(2);
+  50   2              Buzzer_Time(100);
+  51   2              LCD1602_DisplayStr(2, 1, "PassWorld ERROR");
+  52   2              delay(10000);
+  53   2              LCD1602_DisplayStr(2, 2, "Please  Reboot");
+  54   2              delay(10000);
+C51 COMPILER V9.60.7.0   MAIN                                                              05/28/2023 12:00:49 PAGE 2   
+
+  55   2          }
+  56   1      }
+  57          void DisplayNum(void)
+  58          {
+  59   1          uChar i;
+  60   1          for (i = 0; i < count; i++)
+  61   1          {
+  62   2              LCD1602_DisplayNum(2, (4 + (8 - count) + i), password[i], 1);
+  63   2              LCD1602_DisplayStr(2, 1, "PWD:");
+  64   2          }
+  65   1      }
+  66          void C4(void)
+  67          {
+  68   1          uChar KeyNum = 0;
+  69   1          uChar i = 0;
+  70   1          LCD1602_Init();
+  71   1          LCD1602_DisplayStr(1, 3, "This C4 Boom");
+  72   1          LCD1602_DisplayStr(2, 1, "PWD:*******");
+  73   1          count = 0;
+  74   1          while (1)
+  75   1          {
+  76   2              uChar i = 0;
+  77   2              KeyNum = MatirxKey();
+  78   2              if (KeyNum)
+  79   2              {
+  80   3                  if (KeyNum <= 10)
+  81   3                  {
+  82   4                      password[count++] = KeyNum;
+  83   4                      DisplayNum();
+  84   4                  }
+  85   3                  if (KeyNum == 11)
+  86   3                  {
+  87   4                      for (i = 0; i < 7; i++)
+  88   4                      {
+  89   5                          if (password[i] == passwordSave[i])
+  90   5                          {
+  91   6                              LCD1602_Clean(1);
+  92   6                              startBomm();
+  93   6                          }
+  94   5                          else
+  95   5                          {
+  96   6                              passworldError();
+  97   6                          }
+  98   5                      }
+  99   4                  }
+ 100   3              }
+ 101   2          }
+ 102   1      }
+ 103          void main(void)
+ 104          {
+ 105   1          C4();
+ 106   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    432    ----
+   CONSTANT SIZE    =     97    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      8       6
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+C51 COMPILER V9.60.7.0   MAIN                                                              05/28/2023 12:00:49 PAGE 3   
+
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

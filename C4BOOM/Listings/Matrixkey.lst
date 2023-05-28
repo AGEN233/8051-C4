@@ -1,0 +1,208 @@
+C51 COMPILER V9.60.7.0   MATRIXKEY                                                         05/27/2023 18:12:00 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MATRIXKEY
+OBJECT MODULE PLACED IN .\Objects\Matrixkey.obj
+COMPILER INVOKED BY: D:\Development\KEIL\Keil5\C51\BIN\C51.EXE SRC\Matrixkey.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTE
+                    -ND PRINT(.\Listings\Matrixkey.lst) TABS(2) OBJECT(.\Objects\Matrixkey.obj)
+
+line level    source
+
+   1          #include "Matrixkey.h"
+   2          #include <REGX52.H>
+*** WARNING C318 IN LINE 2 OF SRC\Matrixkey.c: can't open file 'REGX52.H'
+   3          unsigned char Matrixkey()
+   4          {
+   5   1      
+   6   1        unsigned char key = 0;
+   7   1      
+   8   1        P1 = 0xFF;
+*** ERROR C202 IN LINE 8 OF SRC\Matrixkey.c: 'P1': undefined identifier
+   9   1        P1_3 = 0;
+*** ERROR C202 IN LINE 9 OF SRC\Matrixkey.c: 'P1_3': undefined identifier
+  10   1        if (P1_7 == 0)
+*** ERROR C202 IN LINE 10 OF SRC\Matrixkey.c: 'P1_7': undefined identifier
+  11   1        {
+  12   2          delay(20);
+  13   2          while (P1_7 == 0)
+*** ERROR C202 IN LINE 13 OF SRC\Matrixkey.c: 'P1_7': undefined identifier
+  14   2            ;
+  15   2          delay(20);
+  16   2          key = 1;
+  17   2        }
+  18   1        if (P1_6 == 0)
+*** ERROR C202 IN LINE 18 OF SRC\Matrixkey.c: 'P1_6': undefined identifier
+  19   1        {
+  20   2          delay(20);
+  21   2          while (P1_6 == 0)
+*** ERROR C202 IN LINE 21 OF SRC\Matrixkey.c: 'P1_6': undefined identifier
+  22   2            ;
+  23   2          delay(20);
+  24   2          key = 5;
+  25   2        }
+  26   1        if (P1_5 == 0)
+*** ERROR C202 IN LINE 26 OF SRC\Matrixkey.c: 'P1_5': undefined identifier
+  27   1        {
+  28   2          delay(20);
+  29   2          while (P1_5 == 0)
+*** ERROR C202 IN LINE 29 OF SRC\Matrixkey.c: 'P1_5': undefined identifier
+  30   2            ;
+  31   2          delay(20);
+  32   2          key = 9;
+  33   2        }
+  34   1        if (P1_4 == 0)
+*** ERROR C202 IN LINE 34 OF SRC\Matrixkey.c: 'P1_4': undefined identifier
+  35   1        {
+  36   2          delay(20);
+  37   2          while (P1_4 == 0)
+*** ERROR C202 IN LINE 37 OF SRC\Matrixkey.c: 'P1_4': undefined identifier
+  38   2            ;
+  39   2          delay(20);
+  40   2          key = 13;
+  41   2        }
+  42   1      
+  43   1        P1 = 0xFF;
+C51 COMPILER V9.60.7.0   MATRIXKEY                                                         05/27/2023 18:12:00 PAGE 2   
+
+*** ERROR C202 IN LINE 43 OF SRC\Matrixkey.c: 'P1': undefined identifier
+  44   1        P1_2 = 0;
+*** ERROR C202 IN LINE 44 OF SRC\Matrixkey.c: 'P1_2': undefined identifier
+  45   1        if (P1_7 == 0)
+*** ERROR C202 IN LINE 45 OF SRC\Matrixkey.c: 'P1_7': undefined identifier
+  46   1        {
+  47   2          delay(20);
+  48   2          while (P1_7 == 0)
+*** ERROR C202 IN LINE 48 OF SRC\Matrixkey.c: 'P1_7': undefined identifier
+  49   2            ;
+  50   2          delay(20);
+  51   2          key = 2;
+  52   2        }
+  53   1        if (P1_6 == 0)
+*** ERROR C202 IN LINE 53 OF SRC\Matrixkey.c: 'P1_6': undefined identifier
+  54   1        {
+  55   2          delay(20);
+  56   2          while (P1_6 == 0)
+*** ERROR C202 IN LINE 56 OF SRC\Matrixkey.c: 'P1_6': undefined identifier
+  57   2            ;
+  58   2          delay(20);
+  59   2          key = 6;
+  60   2        }
+  61   1        if (P1_5 == 0)
+*** ERROR C202 IN LINE 61 OF SRC\Matrixkey.c: 'P1_5': undefined identifier
+  62   1        {
+  63   2          delay(20);
+  64   2          while (P1_5 == 0)
+*** ERROR C202 IN LINE 64 OF SRC\Matrixkey.c: 'P1_5': undefined identifier
+  65   2            ;
+  66   2          delay(20);
+  67   2          key = 10;
+  68   2        }
+  69   1        if (P1_4 == 0)
+*** ERROR C202 IN LINE 69 OF SRC\Matrixkey.c: 'P1_4': undefined identifier
+  70   1        {
+  71   2          delay(20);
+  72   2          while (P1_4 == 0)
+*** ERROR C202 IN LINE 72 OF SRC\Matrixkey.c: 'P1_4': undefined identifier
+  73   2            ;
+  74   2          delay(20);
+  75   2          key = 14;
+  76   2        }
+  77   1      
+  78   1        P1 = 0xFF;
+*** ERROR C202 IN LINE 78 OF SRC\Matrixkey.c: 'P1': undefined identifier
+  79   1        P1_1 = 0;
+*** ERROR C202 IN LINE 79 OF SRC\Matrixkey.c: 'P1_1': undefined identifier
+  80   1        if (P1_7 == 0)
+*** ERROR C202 IN LINE 80 OF SRC\Matrixkey.c: 'P1_7': undefined identifier
+  81   1        {
+  82   2          delay(20);
+  83   2          while (P1_7 == 0)
+*** ERROR C202 IN LINE 83 OF SRC\Matrixkey.c: 'P1_7': undefined identifier
+  84   2            ;
+  85   2          delay(20);
+  86   2          key = 3;
+  87   2        }
+  88   1        if (P1_6 == 0)
+*** ERROR C202 IN LINE 88 OF SRC\Matrixkey.c: 'P1_6': undefined identifier
+  89   1        {
+  90   2          delay(20);
+C51 COMPILER V9.60.7.0   MATRIXKEY                                                         05/27/2023 18:12:00 PAGE 3   
+
+  91   2          while (P1_6 == 0)
+*** ERROR C202 IN LINE 91 OF SRC\Matrixkey.c: 'P1_6': undefined identifier
+  92   2            ;
+  93   2          delay(20);
+  94   2          key = 7;
+  95   2        }
+  96   1        if (P1_5 == 0)
+*** ERROR C202 IN LINE 96 OF SRC\Matrixkey.c: 'P1_5': undefined identifier
+  97   1        {
+  98   2          delay(20);
+  99   2          while (P1_5 == 0)
+*** ERROR C202 IN LINE 99 OF SRC\Matrixkey.c: 'P1_5': undefined identifier
+ 100   2            ;
+ 101   2          delay(20);
+ 102   2          key = 11;
+ 103   2        }
+ 104   1        if (P1_4 == 0)
+*** ERROR C202 IN LINE 104 OF SRC\Matrixkey.c: 'P1_4': undefined identifier
+ 105   1        {
+ 106   2          delay(20);
+ 107   2          while (P1_4 == 0)
+*** ERROR C202 IN LINE 107 OF SRC\Matrixkey.c: 'P1_4': undefined identifier
+ 108   2            ;
+ 109   2          delay(20);
+ 110   2          key = 15;
+ 111   2        }
+ 112   1      
+ 113   1        P1 = 0xFF;
+*** ERROR C202 IN LINE 113 OF SRC\Matrixkey.c: 'P1': undefined identifier
+ 114   1        P1_0 = 0;
+*** ERROR C202 IN LINE 114 OF SRC\Matrixkey.c: 'P1_0': undefined identifier
+ 115   1        if (P1_7 == 0)
+*** ERROR C202 IN LINE 115 OF SRC\Matrixkey.c: 'P1_7': undefined identifier
+ 116   1        {
+ 117   2          delay(20);
+ 118   2          while (P1_7 == 0)
+*** ERROR C202 IN LINE 118 OF SRC\Matrixkey.c: 'P1_7': undefined identifier
+ 119   2            ;
+ 120   2          delay(20);
+ 121   2          key = 4;
+ 122   2        }
+ 123   1        if (P1_6 == 0)
+*** ERROR C202 IN LINE 123 OF SRC\Matrixkey.c: 'P1_6': undefined identifier
+ 124   1        {
+ 125   2          delay(20);
+ 126   2          while (P1_6 == 0)
+*** ERROR C202 IN LINE 126 OF SRC\Matrixkey.c: 'P1_6': undefined identifier
+ 127   2            ;
+ 128   2          delay(20);
+ 129   2          key = 8;
+ 130   2        }
+ 131   1        if (P1_5 == 0)
+*** ERROR C202 IN LINE 131 OF SRC\Matrixkey.c: 'P1_5': undefined identifier
+ 132   1        {
+ 133   2          delay(20);
+ 134   2          while (P1_5 == 0)
+*** ERROR C202 IN LINE 134 OF SRC\Matrixkey.c: 'P1_5': undefined identifier
+ 135   2            ;
+ 136   2          delay(20);
+ 137   2          key = 12;
+ 138   2        }
+ 139   1        if (P1_4 == 0)
+C51 COMPILER V9.60.7.0   MATRIXKEY                                                         05/27/2023 18:12:00 PAGE 4   
+
+*** ERROR C202 IN LINE 139 OF SRC\Matrixkey.c: 'P1_4': undefined identifier
+ 140   1        {
+ 141   2          delay(20);
+ 142   2          while (P1_4 == 0)
+*** ERROR C202 IN LINE 142 OF SRC\Matrixkey.c: 'P1_4': undefined identifier
+ 143   2            ;
+ 144   2          delay(20);
+ 145   2          key = 16;
+ 146   2        }
+ 147   1      
+ 148   1        return key;
+ 149   1      }
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  40 ERROR(S)

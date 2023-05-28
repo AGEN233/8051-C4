@@ -1,0 +1,176 @@
+C51 COMPILER V9.60.7.0   LCD1602                                                           05/28/2023 12:00:49 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE LCD1602
+OBJECT MODULE PLACED IN .\Objects\LCD1602.obj
+COMPILER INVOKED BY: D:\Development\KEIL\Keil5\C51\BIN\C51.EXE SRC\LCD1602.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND
+                    - PRINT(.\Listings\LCD1602.lst) TABS(2) OBJECT(.\Objects\LCD1602.obj)
+
+line level    source
+
+   1          #include "LCD1602.h"
+   2          
+   3          // 定义全局变量
+   4          sbit LCD1602_RW = P2 ^ 5;
+   5          sbit LCD1602_RS = P2 ^ 6;
+   6          sbit LCD1602_EN = P2 ^ 7;
+   7          #define LCD1602_DataPort P0
+   8          
+   9          //声明函数
+  10          void LCD1602_Command(unsigned char Command);
+  11          void LCD1602_Data(unsigned char Data);
+  12          void LCD1602_SetSeat(unsigned char Line, unsigned char Column);
+  13          void LCD1602_Init();
+  14          void LCD1602_DisplayStr(unsigned char Line, unsigned char Column, char *String);
+  15          int LCD1602_Pow(int X, int Y);
+  16          void LCD1602_DisplayNum(unsigned char Line, unsigned char Column, int Num, unsigned char Length);
+  17          void Delay();
+  18          
+  19          // LCD16021602读入[控制]
+  20          // 输入：[command]控制令
+  21          // 输出：无
+  22          void LCD1602_Command(unsigned char Command)
+  23          {
+  24   1        LCD1602_RW = 0; // 模式[0],[读入]内容
+  25   1        LCD1602_RS = 0; // 模式[0],内容[控制]
+  26   1        LCD1602_DataPort = Command;
+  27   1        LCD1602_EN = 1; // 使能，开始读入
+  28   1        Delay();
+  29   1        LCD1602_EN = 0; // 不使能，停止读入
+  30   1        Delay();
+  31   1      }
+  32          // LCD16021602读入[数据]
+  33          // 输入：[Data]数据
+  34          // 输出：无
+  35          void LCD1602_Data(unsigned char Data)
+  36          {
+  37   1        LCD1602_RW = 0; // 模式[0]，[读入]内容
+  38   1        LCD1602_RS = 1; // 模式[1],内容[数据]
+  39   1        LCD1602_DataPort = Data;
+  40   1        LCD1602_EN = 1; // 使能，开始读入
+  41   1        Delay();
+  42   1        LCD1602_EN = 0; // 不使能，停止读入
+  43   1        Delay();
+  44   1      }
+  45          // 初始化LCD16021602
+  46          // 输入：无
+  47          // 输出：无
+  48          void LCD1602_Init()
+  49          {
+  50   1      
+  51   1        LCD1602_Command(0x38); // 八位数据接口，两行显示，5*7点阵
+  52   1        LCD1602_Command(0x0c); // 显示开，光标关，闪烁关
+  53   1        LCD1602_Command(0x06); // 数据读写操作后，光标自动加一，画面不动
+  54   1        LCD1602_Command(0x01); // 光标复位，清屏
+C51 COMPILER V9.60.7.0   LCD1602                                                           05/28/2023 12:00:49 PAGE 2   
+
+  55   1      }
+  56          // 控制光标位置
+  57          // 输入：行列
+  58          // 输出：控制令[LCD1602_Command]→设置→光标
+  59          void LCD1602_SetSeat(unsigned char Line, unsigned char Column)
+  60          {
+  61   1        if (Line == 1) //[1]行
+  62   1        {
+  63   2          LCD1602_Command(0x80 | (Column - 1)); //[Column]列
+  64   2        }
+  65   1        else if (Line == 2) //[2]行
+  66   1        {
+  67   2          LCD1602_Command(0x80 | (Column - 1 + 0x40)); //[Column]列
+  68   2        }
+  69   1      }
+  70          // 读入字符串
+  71          // 输入：显示位置：[行] [列] 显示内容：[字符串]
+  72          // 输出：显示数据[LCD1602_Data] →LCD16021602显示→ LCD16021602屏幕
+  73          void LCD1602_DisplayStr(unsigned char Line, unsigned char Column, char *String)
+  74          {
+  75   1        unsigned char i;
+  76   1        LCD1602_SetSeat(Line, Column);
+  77   1        for (i = 0; String[i] != '\0'; i++)
+  78   1        {
+  79   2          LCD1602_Data(String[i]);
+  80   2        }
+  81   1      }
+  82          // 整形取出[取平方]
+  83          int LCD1602_Pow(int X, int Y)
+  84          {
+  85   1        unsigned char i;
+  86   1        int Result = 1;
+  87   1        for (i = 0; i < Y; i++)
+  88   1        {
+  89   2          Result *= X;
+  90   2        }
+  91   1        return Result;
+  92   1      }
+  93          // 显示整形数
+  94          // 输入：显示位置：[行] [列] 显示内容：[整形数] [长度]
+  95          // 输出：显示数据[LCD1602_Data] →LCD16021602显示→ LCD16021602屏幕
+  96          void LCD1602_DisplayNum(unsigned char Line, unsigned char Column, int Num, unsigned char Length)
+  97          {
+  98   1        
+  99   1        unsigned char i;
+ 100   1        unsigned int Num1;
+ 101   1        LCD1602_SetSeat(Line, Column);
+ 102   1        if (Num >= 0)
+ 103   1        {
+ 104   2          Num1 = Num;
+ 105   2        }
+ 106   1        else
+ 107   1        {
+ 108   2          LCD1602_Data('-');
+ 109   2          Num1 = -Num;
+ 110   2        }
+ 111   1        for (i = Length; i > 0; i--)
+ 112   1        {
+ 113   2          LCD1602_Data(Num1 / LCD1602_Pow(10, i - 1) % 10 + '0');
+ 114   2        }
+ 115   1      }
+ 116          void LCD1602_Clean(uChar Line)
+C51 COMPILER V9.60.7.0   LCD1602                                                           05/28/2023 12:00:49 PAGE 3   
+
+ 117          {
+ 118   1        uChar i;
+ 119   1        switch (Line)
+ 120   1        {
+ 121   2        case 1:
+ 122   2          LCD1602_Command(0x80);
+ 123   2          for (i = 0; i < 16; i++)
+ 124   2          {
+ 125   3            LCD1602_Data(0x20);
+ 126   3          }
+ 127   2          break;
+ 128   2        case 2:
+ 129   2          LCD1602_Command(0x80+0x40);
+ 130   2          for (i = 0; i < 16; i++)
+ 131   2          {
+ 132   3            LCD1602_Data(0x20);
+ 133   3          }
+ 134   2        case 0:
+ 135   2          LCD1602_Command(0x01);
+ 136   2        default:
+ 137   2          break;
+ 138   2        }
+ 139   1        
+ 140   1      }
+ 141          // 延迟
+ 142          void Delay()
+ 143          {
+ 144   1        unsigned char a, b, c;
+ 145   1        for (c = 1; c > 0; c--)
+ 146   1          for (b = 142; b > 0; b--)
+ 147   1            for (a = 2; a > 0; a--);
+ 148   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    331    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      19
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,87 @@
+C51 COMPILER V9.60.7.0   MATIRXKEY                                                         05/28/2023 12:00:49 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MATIRXKEY
+OBJECT MODULE PLACED IN .\Objects\MatirxKey.obj
+COMPILER INVOKED BY: D:\Development\KEIL\Keil5\C51\BIN\C51.EXE SRC\MatirxKey.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTE
+                    -ND PRINT(.\Listings\MatirxKey.lst) TABS(2) OBJECT(.\Objects\MatirxKey.obj)
+
+line level    source
+
+   1          #include "MatirxKey.h"
+   2          void MatirxKey_Delay(void);
+   3          #define MatirxKey_PORT P1
+   4          uChar MatirxKey_Number = 0;
+   5          uChar MatirxKey(void)
+   6          {
+   7   1          MatirxKey_PORT = 0x0f;      // P1.0-1.3输出高电平，P1.4-P1.7输出低电平
+   8   1          if (MatirxKey_PORT != 0x0f) // 读取MatirxKey_PORT看是否有按键按下
+   9   1          {
+  10   2              MatirxKey_Delay();                    // 延时消抖
+  11   2              if (MatirxKey_PORT != 0x0f) // 确认确实有按键按下
+  12   2              {
+  13   3                  // 先确定按键发生在第几列
+  14   3                  switch (MatirxKey_PORT)
+  15   3                  {
+  16   4                  case 0x07:
+  17   4                      MatirxKey_Number = 1;
+  18   4                      break;
+  19   4                  case 0x0b:
+  20   4                      MatirxKey_Number = 2;
+  21   4                      break;
+  22   4                  case 0x0d:
+  23   4                      MatirxKey_Number = 3;
+  24   4                      break;
+  25   4                  case 0x0e:
+  26   4                      MatirxKey_Number = 4;
+  27   4                      break;
+  28   4                  default:
+  29   4                      break;
+  30   4                  }
+  31   3                  // 再确定按键发生在第几行
+  32   3                  MatirxKey_PORT = 0xf0;
+  33   3                  switch (MatirxKey_PORT)
+  34   3                  {
+  35   4                  case 0x70:
+  36   4                      MatirxKey_Number = MatirxKey_Number + 0;
+  37   4                      break;
+  38   4                  case 0xb0:
+  39   4                      MatirxKey_Number = MatirxKey_Number + 4;
+  40   4                      break;
+  41   4                  case 0xd0:
+  42   4                      MatirxKey_Number = MatirxKey_Number + 8;
+  43   4                      break;
+  44   4                  case 0xe0:
+  45   4                      MatirxKey_Number = MatirxKey_Number + 12;
+  46   4                      break;
+  47   4                  }
+  48   3                  while (MatirxKey_PORT != 0xf0);
+  49   3              }
+  50   2              return MatirxKey_Number;
+  51   2          }
+  52   1          return 0;
+  53   1      }
+  54          void MatirxKey_Delay(void)
+C51 COMPILER V9.60.7.0   MATIRXKEY                                                         05/28/2023 12:00:49 PAGE 2   
+
+  55          {
+  56   1          uChar a, b,c;
+  57   1          for (c = 1; c > 0; c--)
+  58   1              for (b = 38; b > 0; b--)
+  59   1                  for (a = 130; a > 0; a--)
+  60   1                      ;
+  61   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    114    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
